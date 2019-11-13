@@ -1,8 +1,13 @@
 
     //Check providers
     if (typeof web3 !== 'undefined') {
-			web3 = new Web3(web3.currentProvider);
-			console.log("Use MetaMask");
+			//web3 = new Web3(web3.currentProvider);
+            //console.log("Use MetaMask");
+            web3 = new Web3(window.ethereum)
+            window.ethereum.enable().catch(error => {
+            // User denied account access
+            console.log(error)
+    })
         } else {
             // set the provider you want from Web3.providers
 			web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:7545"));
@@ -10,6 +15,7 @@
         }
         
             // Set ccount
+            console.log(web3);
             web3.eth.defaultAccount = web3.eth.accounts[0];
 			console.log(web3.eth.defaultAccount);
 
